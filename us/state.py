@@ -4,11 +4,8 @@ Created on Jul 9, 2013
 
 @author: pcdinh
 '''
-'''
-Created on Jul 9, 2013
 
-@author: dinhpham
-'''
+# Data source: http://www.50states.com/abbreviations.htm#.UdvqqrxSax0
 states = '''
 ALABAMA     AL
 ALASKA     AK
