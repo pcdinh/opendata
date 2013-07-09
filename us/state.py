@@ -70,6 +70,13 @@ Puerto Rico    PR
 Virgin Islands    VI
 '''
 
+def _normalize(line_):
+    '''
+    @return: a tuple (full state name, state abbreviation)
+    '''
+    most_right_ws = line_.rfind(' ')
+    return line_[:most_right_ws].strip().lower().title(), line_[most_right_ws:].strip()
+
 def to_json(states_, flat=True):
     """
     
@@ -82,19 +89,19 @@ def to_json(states_, flat=True):
     for line in iter(states_.splitlines()):
         if line == '':
             continue
-        most_right_ws = line.rfind(' ')
+        full_name, abbrev = _normalize(line)
         if flat is True:
-            ret.append([line[:most_right_ws].strip().lower().title(), line[most_right_ws:].strip()])
+            ret.append([full_name, abbrev])
         else:
-            ret.append({'name': line[:most_right_ws].strip().lower().title(), 'abbrev': line[most_right_ws:].strip()})
+            ret.append({'name': full_name, 'abbrev': abbrev})
     return json.dumps(ret)
 
 def print_out(states_):
     for line in iter(states_.splitlines()):
         if line == '':
             continue
-        most_right_ws = line.rfind(' ')
-        print line[:most_right_ws].strip().lower().title(), '-', line[most_right_ws:].strip()
+        full_name, abbrev = _normalize(line)
+        print full_name, '-', abbrev
 
 if __name__ == "__main__":
     print_out(states)
